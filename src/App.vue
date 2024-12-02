@@ -5,10 +5,28 @@
         <component :is="Component" />
       </keep-alive>
     </router-view>
+    <UToolTip :isShow="this.getIsShown" @closeTooltip="this.hideTooltip()">
+      <template #tooltipBody>{{ this.getTextTooltip }}</template>
+    </UToolTip>
   </main>
 </template>
 
-<script></script>
+<script>
+import { mapGetters, mapMutations } from 'vuex'
+import UToolTip from './components/ui/UToolTip.vue'
+
+export default {
+  components: {
+    UToolTip
+  },
+  methods: {
+    ...mapMutations('tooltipStore', ['hideTooltip'])
+  },
+  computed: {
+    ...mapGetters('tooltipStore', ['getIsShown', 'getTextTooltip'])
+  }
+}
+</script>
 
 <style lang="sass">
 *,

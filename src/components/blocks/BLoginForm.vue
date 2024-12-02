@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 import UButton from '../ui/UButton.vue'
 import UInput from '../ui/UInput.vue'
 import UCommonInput from '../ui/inputs/UCommonInput.vue'
@@ -59,7 +59,8 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['login']),
+    ...mapActions('authStore', ['login']),
+    ...mapMutations('tooltipStore', ['showTooltip']),
     togglePassword() {
       this.showPassword = !this.showPassword
     },
@@ -67,8 +68,9 @@ export default {
       try {
         const token = await this.login({ username: this.username, password: this.password })
         console.log('Logged in successfully, token:', token)
+        // this.showTooltip({ text: 'Вы успешно авторизированы', isSuccess: true })
       } catch (error) {
-        // console.error('Login failed:', error)
+        this.showTooltip({ text: 'Ошибка авторизации', isSuccess: false })
       }
     }
   }
