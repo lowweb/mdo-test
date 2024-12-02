@@ -1,20 +1,26 @@
 <template>
-  <label class="input">
-    <span class="input__label"><slot name="inputLabel"></slot></span>
-
-    <input
-      :type="type"
-      :placeholder="placeholder"
-      :disabled="disabled"
-      v-model="model"
-      class="input__field"
-    />
-  </label>
+  <div class="input">
+    <div class="input__icon"><slot name="inputLeftIcon"></slot></div>
+    <label class="input__content">
+      <span class="input__label"><slot name="inputLabel"></slot></span>
+      <input
+        :type="type"
+        :placeholder="placeholder"
+        :disabled="disabled"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
+        class="input__field"
+      />
+    </label>
+    <div class="input__icon"><slot name="inputRightIcon"></slot></div>
+  </div>
 </template>
 
 <script>
 export default {
+  emits: ['update:modelValue'],
   props: {
+    modelValue: String,
     disabled: {
       type: Boolean,
       required: false,
@@ -37,16 +43,23 @@ export default {
 <style lang="sass" scoped>
 .input
   display: flex
-  flex-direction: column
   width: 100%
-  // gap: 8px
+  gap: 8px
   border-bottom: 1px solid var(--Background-color-light, #ccc)
   min-height: 56px
+  padding-right: 12px
 
 
   &__icon
     display: flex
     align-self: flex-end
+
+  &__content
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    // gap: 8.5px
+    width: 100%
 
   &__label
     display: flex
@@ -65,5 +78,4 @@ export default {
     line-height: 143%
     color: $color-black
     border: none
-    width: 100%
 </style>

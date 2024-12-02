@@ -3,11 +3,11 @@
     <h1 class="auth-form__title">Авторизация</h1>
 
     <div class="auth-form__body">
-      <UInput placeholder="+7" aria-required="true" v-model="username">
+      <UFormInput placeholder="+7" aria-required="true" v-model="username">
         <template #inputLeftIcon><IconPhone /></template>
         <template #inputLabel>Логин или Телефон</template>
-      </UInput>
-      <UInput
+      </UFormInput>
+      <UFormInput
         placeholder="Пароль"
         :type="showPassword ? 'text' : 'password'"
         aria-required="true"
@@ -20,7 +20,7 @@
             <IconShowPass v-if="showPassword"></IconShowPass>
           </UIconButton>
         </template>
-      </UInput>
+      </UFormInput>
     </div>
     <UButton type="submit">Войти</UButton>
   </form>
@@ -29,22 +29,21 @@
 <script>
 import { mapActions, mapMutations } from 'vuex'
 import UButton from '../ui/UButton.vue'
-import UInput from '../ui/UInput.vue'
+import UFormInput from '../ui/UFormInput.vue'
 import UCommonInput from '../ui/inputs/UCommonInput.vue'
-import UIconInput from '../ui/inputs/UIconInput.vue'
 import IconPhone from '../icons/IconPhone.vue'
 import IconLock from '../icons/IconLock.vue'
 import IconShowPass from '../icons/IconShowPass.vue'
 import IconHidePass from '../icons/IconHidePass.vue'
 import UIconButton from '../ui/UIconButton.vue'
+import router from '@/router'
 
 export default {
   name: 'LoginForm',
   components: {
     UButton,
-    UInput,
+    UFormInput,
     UCommonInput,
-    UIconInput,
     IconPhone,
     IconLock,
     IconShowPass,
@@ -68,9 +67,9 @@ export default {
       try {
         const token = await this.login({ username: this.username, password: this.password })
         console.log('Logged in successfully, token:', token)
-        // this.showTooltip({ text: 'Вы успешно авторизированы', isSuccess: true })
+        router.push('/')
       } catch (error) {
-        this.showTooltip({ text: 'Ошибка авторизации', isSuccess: false })
+        this.showTooltip({ text: 'Неправильные данные', isSuccess: false })
       }
     }
   }
