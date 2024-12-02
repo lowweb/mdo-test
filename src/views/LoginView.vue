@@ -1,17 +1,17 @@
 <template>
-  <BMainWrap>
+  <BLoginWrap>
     <BLoginForm />
-  </BMainWrap>
+  </BLoginWrap>
 </template>
 
 <script>
 import BLoginForm from '../components/blocks/BLoginForm.vue'
-import BMainWrap from '../components/blocks/BMainWrap.vue'
+import BLoginWrap from '../components/blocks/BLoginWrap.vue'
 
 export default {
   components: {
     BLoginForm,
-    BMainWrap
+    BLoginWrap
   }
 }
 </script>

@@ -45,11 +45,11 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach(async (to, from) => {
-  const isAuthenticated = store.getters['authStore/isAuthenticated']
-  if (!isAuthenticated && to.name !== 'login') {
-    return { name: 'login' }
-  }
-})
+// router.beforeEach(async (to, from) => {
+//   const isAuthenticated = store.getters['authStore/isAuthenticated']
+//   if (!isAuthenticated && to.name !== 'login') {
+//     return { name: 'login' }
+//   }
+// })
 
 export default router
