@@ -6,7 +6,7 @@
 
 <script></script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .main-wrap
   display: flex
   align-items: center

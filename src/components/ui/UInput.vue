@@ -39,7 +39,7 @@ export default {
   display: flex
   flex-direction: column
   width: 100%
-  // gap: 8px
+  justify-content: center
   border-bottom: 1px solid var(--Background-color-light, #ccc)
   min-height: 56px
 

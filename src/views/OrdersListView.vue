@@ -1,16 +1,19 @@
 <template>
-  <div class="about">
-    <h1>List</h1>
-    <UButton>Send</UButton>
-  </div>
+  <BOrdersWrap>
+    <BDataView />
+  </BOrdersWrap>
 </template>
 
 <script>
+import BOrdersWrap from '../components/blocks/BOrdersWrap.vue'
+import BDataView from '@/components/blocks/BDataView.vue'
 import UButton from '../components/ui/UButton.vue'
 import { mapGetters, mapActions } from 'vuex'
 export default {
   components: {
-    UButton
+    UButton,
+    BOrdersWrap,
+    BDataView
   },
   data() {
     return { searchQuery: '' }
