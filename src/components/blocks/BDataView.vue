@@ -3,8 +3,8 @@
     <div class="dataview__header">
       <UButton class="dataview__newbutton">СОЗДАТЬ</UButton>
       <div class="dataview__filter">
-        <UInput placeholder="Поиск (№ заявки, название)"></UInput>
-        <UInput placeholder="Дом"></UInput>
+        <UInput placeholder="Поиск (№ заявки, название)"> </UInput>
+        <USelect placeholder="Дом"></USelect>
       </div>
     </div>
     <div class="dataview__table"></div>
@@ -14,10 +14,12 @@
 <script>
 import UButton from '../ui/UButton.vue'
 import UInput from '../ui/UInput.vue'
+import USelect from '../ui/USelect.vue'
 export default {
   components: {
     UButton,
-    UInput
+    UInput,
+    USelect
   }
 }
 </script>

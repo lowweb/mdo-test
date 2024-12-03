@@ -43,7 +43,6 @@ export default {
   border-bottom: 1px solid var(--Background-color-light, #ccc)
   min-height: 56px
 
-
   &__icon
     display: flex
     align-self: flex-end
@@ -66,4 +65,10 @@ export default {
     color: $color-black
     border: none
     width: 100%
+
+    &::placeholder
+      color: #ababab
+
+    &:focus
+      outline: none
 </style>
