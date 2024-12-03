@@ -7,7 +7,7 @@
       class="select__field"
       :options="options"
     >
-      <option disabled value="" selected class="select__placeholder">Выберите из списка</option>
+      <option value="" disabled selected hidden class="select__placeholder">Choose a drink</option>
       <option v-for="option in options" :key="option.value" :value="option.value">
         {{ option.name }}
       </option>
@@ -51,7 +51,7 @@ export default {
     line-height: 150%
     color: $color-lightgreen
 
-  &__placeholder
+  &__placeholder[hidden]
     color: #ababab
 
   &__field
