@@ -1,14 +1,16 @@
 <template>
   <label class="input">
     <span class="input__label"><slot name="inputLabel"></slot></span>
-
-    <input
-      :type="type"
-      :placeholder="placeholder"
-      :disabled="disabled"
-      v-model="model"
-      class="input__field"
-    />
+    <div class="input__body">
+      <input
+        :type="type"
+        :placeholder="placeholder"
+        :disabled="disabled"
+        v-model="model"
+        class="input__field"
+      />
+      <span class="input__righticon"><slot name="inputRightIcon"></slot></span>
+    </div>
   </label>
 </template>
 
@@ -56,6 +58,10 @@ export default {
     font-size: 12px
     line-height: 150%
     color: $color-lightgreen
+
+  &__body
+    display: flex
+    align-items: center
 
   &__field
     font-family: $font-family

@@ -20,7 +20,6 @@
   text-align: center
   color: $color-white
   border: none
-  cursor: pointer
 
   &:hover
     background-color: $color-green

@@ -7,7 +7,9 @@
       class="select__field"
       :options="options"
     >
-      <option value="" disabled selected hidden class="select__placeholder">Choose a drink</option>
+      <option value="" disabled selected hidden>Выберите вариант</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
       <option v-for="option in options" :key="option.value" :value="option.value">
         {{ option.name }}
       </option>
