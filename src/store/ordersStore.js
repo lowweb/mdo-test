@@ -12,11 +12,11 @@ export const ordersStore = {
   },
   actions: {
     async fetchItems({ commit, state }) {
-      const token = 'a12c249a0e5d16923a6ad7dac2db7ade6f73cb92'
+      const KEY_FROM_STORAGE = sessionStorage.getItem('mdo_key')
       try {
         const response = await axios.get('https://dev.moydomonline.ru/api/appeals/v1.0/appeals/', {
           headers: {
-            Authorization: `Token ${token}`
+            Authorization: `Token ${KEY_FROM_STORAGE}`
           }
         })
         const data = response.data
@@ -27,5 +27,5 @@ export const ordersStore = {
       }
     }
   },
-  etters: { paginatedOrders: (state) => state.orders }
+  getters: { paginatedOrders: (state) => state.orders }
 }

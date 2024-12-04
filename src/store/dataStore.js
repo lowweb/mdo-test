@@ -78,7 +78,6 @@ export const dataStore = {
       state.currentPage = page
     },
     setRowsPerPage(state, rows) {
-      console.log('rows=' + rows)
       state.rowsPerPage = rows
     }
   },

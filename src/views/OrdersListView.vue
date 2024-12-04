@@ -17,16 +17,16 @@ export default {
   },
   data() {
     return { searchQuery: '' }
-  }
+  },
   // computed: {
   //   ...mapGetters('ordersStore', ['paginatedItems'])
   // },
-  // methods: {
-  //   ...mapActions('ordersStore', ['fetchItems'])
-  // },
-  // created() {
-  //   this.fetchItems()
-  // }
+  methods: {
+    ...mapActions('ordersStore', ['fetchItems'])
+  },
+  created() {
+    this.fetchItems()
+  }
 }
 </script>
 <style>
