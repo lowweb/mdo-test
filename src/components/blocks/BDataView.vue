@@ -14,7 +14,17 @@
       </div>
     </div>
     <div class="dataview__table">
-      <UTable></UTable>
+      <TableComponent
+        ref="tableComponent"
+        :rows-per-page="rowsPerPage"
+        :currentPage="currentPage"
+      />
+      <PaginationComponent
+        :total-items="totalItems"
+        :rows-per-page="rowsPerPage"
+        @page-changed="handlePageChange"
+        @rows-per-page-changed="handleRowsPerPageChange"
+      />
     </div>
   </section>
 </template>
@@ -27,6 +37,8 @@ import UCustomSelect from '../ui/UCustomSelect.vue'
 import IconSearch from '../icons/IconSearch.vue'
 import UIconButton from '../ui/UIconButton.vue'
 import UTable from '../ui/UTable.vue'
+import TableComponent from '../ui/UTablemod.vue'
+import PaginationComponent from '../ui/UPagination.vue'
 export default {
   components: {
     UButton,
@@ -35,7 +47,23 @@ export default {
     UCustomSelect,
     IconSearch,
     UIconButton,
-    UTable
+    UTable,
+    TableComponent,
+    PaginationComponent
+  },
+  data() {
+    return { rowsPerPage: 10, currentPage: 1, totalItems: 100 }
+  },
+  methods: {
+    handlePageChange(page) {
+      this.currentPage = page
+      this.$refs.tableComponent.updatePage(page)
+    },
+    handleRowsPerPageChange(rows) {
+      this.rowsPerPage = rows
+      this.currentPage = 1
+      this.$refs.tableComponent.updateRowsPerPage(rows)
+    }
   }
 }
 </script>

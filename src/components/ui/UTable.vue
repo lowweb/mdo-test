@@ -16,7 +16,7 @@
         <td :data-label="columnsName[1]">{{ row.created_at }}</td>
         <td :data-label="columnsName[2]">{{ row.premise?.address }}</td>
         <td :data-label="columnsName[3]">
-          {{ row.applicant.first_name + ' ' + row.applicant.last_name }}
+          {{ row.applicant.first_name + ' ' + row.applicant?.last_name }}
         </td>
         <td :data-label="columnsName[4]">{{ row.description }}</td>
         <td :data-label="columnsName[5]">{{ row.due_date }}</td>
