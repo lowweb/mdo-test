@@ -6,7 +6,7 @@
         :type="type"
         :placeholder="placeholder"
         :disabled="disabled"
-        v-model="model"
+        :value="modelValue"
         class="input__field"
       />
       <span class="input__righticon"><slot name="inputRightIcon"></slot></span>
@@ -16,7 +16,9 @@
 
 <script>
 export default {
+  emits: ['update:modelValue'],
   props: {
+    modelValue: String,
     disabled: {
       type: Boolean,
       required: false,

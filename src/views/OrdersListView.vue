@@ -22,10 +22,12 @@ export default {
   //   ...mapGetters('ordersStore', ['paginatedItems'])
   // },
   methods: {
-    ...mapActions('ordersStore', ['fetchItems'])
+    ...mapActions('ordersStore', ['fetchOrders']),
+    ...mapActions('addressesStore', ['fetchAddresses'])
   },
   created() {
-    this.fetchItems()
+    this.fetchOrders()
+    this.fetchAddresses()
   }
 }
 </script>

@@ -20,7 +20,6 @@ export const authStore = {
         })
         const token = response.data.key
         commit('SET_AUTH_TOKEN', token)
-
         return token
       } catch (error) {
         console.error('Error logging in:', error)

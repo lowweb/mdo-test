@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { getAppeals } from '../services/api'
 
 export const ordersStore = {
   namespaced: true,
@@ -6,26 +7,49 @@ export const ordersStore = {
     orders: []
   }),
   mutations: {
-    SET_ITEMS(state, data) {
-      state.orders = data.items
+    setOrders(state, data) {
+      state.orders = data
+    },
+    setSearchQuery(state, query) {
+      state.searchQuery = query
+    },
+    setAddressFilter(state, address) {
+      state.addressFilter = address
+    },
+    setSortKey(state, key) {
+      state.sortKey = key
+    },
+    setSortOrder(state, order) {
+      state.sortOrder = order
     }
   },
   actions: {
-    async fetchItems({ commit, state }) {
-      const KEY_FROM_STORAGE = sessionStorage.getItem('mdo_key')
+    async fetchOrders({ commit }) {
       try {
-        const response = await axios.get('https://dev.moydomonline.ru/api/appeals/v1.0/appeals/', {
-          headers: {
-            Authorization: `Token ${KEY_FROM_STORAGE}`
-          }
-        })
-        const data = response.data
-        console.log(data.items)
-        commit('SET_ITEMS', { items: data.items })
+        const data = await getAppeals()
+        commit('setOrders', data)
       } catch (error) {
         console.error('Error fetching items:', error)
       }
     }
   },
-  getters: { paginatedOrders: (state) => state.orders }
+  getters: {
+    filteredData(state) {
+      let data = state.orders.filter(
+        (item) =>
+          item.number.toString().includes(state.searchQuery) &&
+          (state.addressFilter === '' || item.address === state.addressFilter)
+      )
+      if (state.sortKey) {
+        data.sort((a, b) => {
+          const aKey = a[state.sortKey]
+          const bKey = b[state.sortKey]
+          if (aKey < bKey) return -1 * state.sortOrder
+          if (aKey > bKey) return 1 * state.sortOrder
+          return 0
+        })
+      }
+      return data
+    }
+  }
 }

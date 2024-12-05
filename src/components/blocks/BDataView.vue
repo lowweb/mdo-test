@@ -2,24 +2,11 @@
   <section class="dataview">
     <div class="dataview__header">
       <UButton class="button--medium dataview__newbutton">СОЗДАТЬ</UButton>
-      <div class="dataview__filter">
-        <UInput placeholder="Поиск (№ заявки, название)">
-          <template #inputRightIcon>
-            <UIconButton @click="console.log('dnejbdjwe')" class="dataview__inputbtn">
-              <IconSearch />
-            </UIconButton>
-          </template>
-        </UInput>
-        <USelect />
-      </div>
+      <BDataFilters class="dataview__filter" />
     </div>
     <div class="dataview__table">
-      <TableComponent
-        ref="tableComponent"
-        :rows-per-page="rowsPerPage"
-        :currentPage="currentPage"
-      />
-      <PaginationComponent
+      <UTable ref="uTable" :rows-per-page="rowsPerPage" :currentPage="currentPage" />
+      <UPagination
         :total-items="totalItems"
         :rows-per-page="rowsPerPage"
         @page-changed="handlePageChange"
@@ -31,38 +18,37 @@
 
 <script>
 import UButton from '../ui/UButton.vue'
-import UInput from '../ui/UInput.vue'
-import USelect from '../ui/USelect.vue'
 import UCustomSelect from '../ui/UCustomSelect.vue'
 import IconSearch from '../icons/IconSearch.vue'
 import UIconButton from '../ui/UIconButton.vue'
-import UTable from '../ui/UTable.vue'
-import TableComponent from '../ui/UTablemod.vue'
-import PaginationComponent from '../ui/UPagination.vue'
+import UTable from '../ui/UTablemod.vue'
+import UPagination from '../ui/UPagination.vue'
+import BDataFilters from './BDataFilters.vue'
+import { mapState, mapMutations, mapGetters } from 'vuex'
 export default {
   components: {
     UButton,
-    UInput,
-    USelect,
     UCustomSelect,
     IconSearch,
     UIconButton,
     UTable,
-    TableComponent,
-    PaginationComponent
+    UTable,
+    UPagination,
+    BDataFilters
   },
   data() {
-    return { rowsPerPage: 10, currentPage: 1, totalItems: 100 }
+    return { rowsPerPage: null, currentPage: null, totalItems: null }
   },
+
   methods: {
     handlePageChange(page) {
       this.currentPage = page
-      this.$refs.tableComponent.updatePage(page)
+      this.$refs.uTable.updatePage(page)
     },
     handleRowsPerPageChange(rows) {
       this.rowsPerPage = rows
       this.currentPage = 1
-      this.$refs.tableComponent.updateRowsPerPage(rows)
+      this.$refs.uTable.updateRowsPerPage(rows)
     }
   }
 }

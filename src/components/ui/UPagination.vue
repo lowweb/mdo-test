@@ -46,7 +46,6 @@ export default {
       }
     },
     updateRowsPerPage() {
-      console.log('rowsPerPage=' + this.rowsPerPage)
       this.setRowsPerPage(this.rowsPerPage)
       this.setCurrentPage(1)
     }

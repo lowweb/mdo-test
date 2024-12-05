@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="text" v-model="searchQuery" @input="updateSearch" placeholder="Search by number" />
+    <input type="text" v-model="searchQuery" @input="updateSearch" placeholder="Search in orders" />
     <select v-model="addressFilter" @change="updateAddressFilter">
       <option value="">All Addresses</option>
       <option v-for="address in uniqueAddresses" :key="address" :value="address">

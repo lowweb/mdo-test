@@ -8,8 +8,6 @@
       :options="options"
     >
       <option value="" disabled selected hidden>Выберите вариант</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
       <option v-for="option in options" :key="option.value" :value="option.value">
         {{ option.name }}
       </option>

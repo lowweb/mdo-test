@@ -2,7 +2,7 @@
 export const dataStore = {
   namespaced: true,
   state: () => ({
-    tableData: [
+    orders: [
       {
         number: 1,
         created_at: '2023-12-01',
@@ -74,11 +74,11 @@ export const dataStore = {
   },
   getters: {
     uniqueAddresses(state) {
-      const addresses = state.tableData.map((item) => item.address)
+      const addresses = state.orders.map((item) => item.address)
       return [...new Set(addresses)]
     },
     filteredData(state) {
-      let data = state.tableData.filter(
+      let data = state.orders.filter(
         (item) =>
           item.number.toString().includes(state.searchQuery) &&
           (state.addressFilter === '' || item.address === state.addressFilter)

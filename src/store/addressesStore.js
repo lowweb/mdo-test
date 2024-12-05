@@ -1,12 +1,30 @@
+import { getAddresses } from '../services/api'
 export const addressesStore = {
   namespaced: true,
   state: () => ({
     addresses: []
   }),
   mutations: {
-    setAddresses(state, addresses) {
-      state.addresses = addresses
+    setAddresses(state, data) {
+      state.addresses = data
     }
   },
-  getters: {}
+  actions: {
+    async fetchAddresses({ commit }) {
+      try {
+        const data = await getAddresses()
+        commit('setAddresses', data.results)
+      } catch (error) {
+        console.error('Error fetching items:', error)
+      }
+    }
+  },
+  getters: {
+    getAddresses(state) {
+      const addresses = state.addresses.map((item) => {
+        return { valaue: item.customer_premise_id, name: item.address }
+      })
+      return [...addresses]
+    }
+  }
 }
