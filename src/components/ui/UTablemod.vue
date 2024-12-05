@@ -78,7 +78,8 @@ export default {
   },
   computed: {
     ...mapState('dataStore', ['searchQuery', 'addressFilter']),
-    ...mapGetters('dataStore', ['paginatedData', 'uniqueAddresses'])
+    ...mapGetters('dataStore', ['uniqueAddresses']),
+    ...mapGetters('paginationStore', ['paginatedData'])
   },
   methods: {
     ...mapMutations('dataStore', [

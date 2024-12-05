@@ -51,15 +51,12 @@ export const dataStore = {
         due_date: '2023-11-10',
         statusname: 'Pending'
       }
-
       // Добавьте больше данных по необходимости
     ],
     searchQuery: '',
     addressFilter: '',
     sortKey: '',
-    sortOrder: 1,
-    currentPage: 1,
-    rowsPerPage: 2
+    sortOrder: 1
   }),
   mutations: {
     setSearchQuery(state, query) {
@@ -73,12 +70,6 @@ export const dataStore = {
     },
     setSortOrder(state, order) {
       state.sortOrder = order
-    },
-    setCurrentPage(state, page) {
-      state.currentPage = page
-    },
-    setRowsPerPage(state, rows) {
-      state.rowsPerPage = rows
     }
   },
   getters: {
@@ -102,14 +93,6 @@ export const dataStore = {
         })
       }
       return data
-    },
-    paginatedData(state, getters) {
-      const start = (state.currentPage - 1) * state.rowsPerPage
-      const end = start + state.rowsPerPage
-      return getters.filteredData.slice(start, end)
-    },
-    totalItems(state, getters) {
-      return getters.filteredData.length
     }
   }
 }

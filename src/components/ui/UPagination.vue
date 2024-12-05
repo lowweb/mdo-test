@@ -19,22 +19,22 @@ export default {
     }
   },
   computed: {
-    ...mapState('dataStore', ['currentPage']),
+    ...mapState('paginationStore', ['currentPage']),
     rowsPerPage: {
       get() {
-        return this.$store.state.dataStore.rowsPerPage
+        return this.$store.state.paginationStore.rowsPerPage
       },
       set(value) {
         this.setRowsPerPage(value)
       }
     },
-    ...mapGetters('dataStore', ['totalItems', 'totalPages']),
+    ...mapGetters('paginationStore', ['totalItems', 'totalPages']),
     totalPages() {
       return Math.ceil(this.totalItems / this.rowsPerPage)
     }
   },
   methods: {
-    ...mapMutations('dataStore', ['setCurrentPage', 'setRowsPerPage']),
+    ...mapMutations('paginationStore', ['setCurrentPage', 'setRowsPerPage']),
     prevPage() {
       if (this.currentPage > 1) {
         this.setCurrentPage(this.currentPage - 1)
