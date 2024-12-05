@@ -26,7 +26,7 @@
   </table>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .table {
   width: 100%;
   border-spacing: 0;

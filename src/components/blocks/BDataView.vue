@@ -1,7 +1,7 @@
 <template>
   <section class="dataview">
     <div class="dataview__header">
-      <UButton class="dataview__newbutton">СОЗДАТЬ</UButton>
+      <UButton class="button--medium dataview__newbutton">СОЗДАТЬ</UButton>
       <div class="dataview__filter">
         <UInput placeholder="Поиск (№ заявки, название)">
           <template #inputRightIcon>
@@ -92,9 +92,9 @@ export default {
       border: solid 1px $color-white
       border-radius: 5px
 
-    &__inputbtn:hover
-      fill: #50b053
-      border: solid 1px $color-green
-      border-radius: 5px
-      transition: .7s
+      &:hover
+        fill: #50b053
+        border: solid 1px $color-green
+        border-radius: 5px
+        transition: .7s
 </style>

@@ -21,6 +21,10 @@
   color: $color-white
   border: none
 
+  &--medium
+    padding: 7px 16px
+  &--small
+    padding: 4px 14.5px
   &:hover
     background-color: $color-green
 </style>
