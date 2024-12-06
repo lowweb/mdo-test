@@ -23,8 +23,9 @@ export const addressesStore = {
   getters: {
     getAddresses(state) {
       const addresses = state.addresses.map((item) => {
-        return { valaue: item.customer_premise_id, name: item.address }
+        return { value: item.customer_premise_id, name: item.address }
       })
+      console.log
       return [...addresses]
     }
   }

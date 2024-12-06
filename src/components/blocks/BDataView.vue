@@ -4,15 +4,8 @@
       <UButton class="button--medium dataview__newbutton">СОЗДАТЬ</UButton>
       <BDataFilters class="dataview__filter" />
     </div>
-    <div class="dataview__table">
-      <UTable />
-      <UPagination
-        :total-items="totalItems"
-        :rows-per-page="rowsPerPage"
-        @page-changed="handlePageChange"
-        @rows-per-page-changed="handleRowsPerPageChange"
-      />
-    </div>
+    <UTable class="dataview__table" />
+    <UPagination class="dataview__pagination" />
   </section>
 </template>
 
@@ -83,4 +76,6 @@ export default {
         border: solid 1px $color-green
         border-radius: 5px
         transition: .7s
+    &__table
+      margin-bottom: 32px
 </style>

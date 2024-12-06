@@ -1,5 +1,10 @@
 <template>
   <div class="pagination">
+    <div class="pagination__info">
+      {{ fromPageToPage }}
+      <USelect :options="options" v-model="this.rowsPerPage" @change="updateRowsPerPage" />
+    </div>
+
     <button @click="prevPage" :disabled="currentPage === 1">Previous</button>
     <span>Page {{ currentPage }} of {{ totalPages }}</span>
     <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
@@ -11,15 +16,31 @@
 
 <script>
 import { mapState, mapMutations, mapGetters } from 'vuex'
+import USelect from './USelect.vue'
 
 export default {
+  components: {
+    USelect
+  },
   data() {
     return {
-      options: [10, 50, 100, 200]
+      options: [
+        { value: 10, name: 10 },
+        { value: 50, name: 50 },
+        { value: 100, name: 100 },
+        { value: 200, name: 200 }
+      ]
     }
   },
   computed: {
-    ...mapState('paginationStore', ['currentPage']),
+    ...mapState('paginationStore', [
+      'currentPage',
+      'rowsPerPage',
+      'countRecords',
+      'nextPage',
+      'prevPage',
+      'pagesCount'
+    ]),
     rowsPerPage: {
       get() {
         return this.$store.state.paginationStore.rowsPerPage
@@ -31,6 +52,17 @@ export default {
     ...mapGetters('paginationStore', ['totalItems', 'totalPages']),
     totalPages() {
       return Math.ceil(this.totalItems / this.rowsPerPage)
+    },
+    fromPageToPage() {
+      return (
+        this.currentPage * this.rowsPerPage -
+        this.rowsPerPage +
+        1 +
+        '-' +
+        this.currentPage * this.rowsPerPage +
+        ' из ' +
+        this.countRecords
+      )
     }
   },
   methods: {
@@ -52,3 +84,12 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+.pagination
+  display: flex
+  flex-direction: row
+  align-items: center
+  &__info
+    display: flex
+</style>

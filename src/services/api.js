@@ -7,7 +7,7 @@ const apiClient = axios.create({
     'Content-Type': 'application/json'
   }
 })
-export const getAppeals = async (search = '', premise_id = '', page_size = 50, page = 1) => {
+export const getAppeals = async (search = '', premise_id = '', page_size = 10, page = 1) => {
   const TOKEN_FROM_STORAGE = sessionStorage.getItem('mdo_key')
   console.log(TOKEN_FROM_STORAGE)
   try {

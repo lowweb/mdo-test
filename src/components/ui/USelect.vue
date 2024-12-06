@@ -37,6 +37,9 @@ export default {
   border-bottom: 1px solid var(--Background-color-light, #ccc)
   min-height: 56px
 
+  &--slim
+    min-height: unset
+
   &__icon
     display: flex
     align-self: flex-end
