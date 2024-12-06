@@ -9,7 +9,6 @@ const apiClient = axios.create({
 })
 export const getAppeals = async (search = '', premise_id = '', page_size = 10, page = 1) => {
   const TOKEN_FROM_STORAGE = sessionStorage.getItem('mdo_key')
-  console.log(TOKEN_FROM_STORAGE)
   try {
     const response = await apiClient.get(`appeals/v1.0/appeals/`, {
       params: { search: search, premise_id: premise_id, page_size: page_size, page: page },

@@ -39,9 +39,14 @@ export const ordersStore = {
     }
   },
   actions: {
-    async fetchOrders({ commit }) {
+    async fetchOrders({ commit }, payload) {
       try {
-        const data = await getAppeals()
+        const data = await getAppeals(
+          payload.search,
+          payload.premiseid,
+          payload.pagesize,
+          payload.page
+        )
         commit('setOrders', data)
         commit('paginationStore/setCurrentPage', data.page, { root: true })
         commit('paginationStore/setRowsPerPage', data.page_size, { root: true })

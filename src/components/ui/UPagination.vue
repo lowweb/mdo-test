@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapGetters } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import USelect from './USelect.vue'
 import UIconButton from './UIconButton.vue'
 import IconToEnd from '../icons/IconToEnd.vue'
@@ -140,6 +140,8 @@ export default {
 
   methods: {
     ...mapMutations('paginationStore', ['setCurrentPage', 'setRowsPerPage']),
+    ...mapActions('ordersStore', ['fetchOrders']),
+
     updateRowsPerPage() {
       this.setRowsPerPage(this.rowsPerPage)
       this.setCurrentPage(1)
@@ -147,6 +149,7 @@ export default {
     goToPage(page) {
       if (page >= 1 && page <= this.pagesCount) {
         this.currentPage = page
+        this.fetchOrders({ search: '', premiseid: '', pagesize: this.rowsPerPage, page: page })
       }
     },
     goToFirstPage() {

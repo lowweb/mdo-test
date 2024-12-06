@@ -32,14 +32,9 @@ export const paginationStore = {
   },
   getters: {
     paginatedData(state, getters) {
-      const start = (state.currentPage - 1) * state.rowsPerPage
-      const end = start + state.rowsPerPage
-      // return store.getters['dataStore/filteredData'].slice(start, end)
-      return store.getters['ordersStore/filteredData'].slice(start, end)
+      // const start = (state.currentPage - 1) * state.rowsPerPage
+      // const end = start + state.rowsPerPage
+      return store.getters['ordersStore/filteredData']
     }
-    // totalItems(state, getters) {
-    //   // return store.getters['dataStore/filteredData'].length
-    //   return store.getters['ordersStore/filteredData'].length
-    // }
   }
 }

@@ -24,7 +24,7 @@ export default {
     ...mapActions('addressesStore', ['fetchAddresses'])
   },
   created() {
-    this.fetchOrders()
+    this.fetchOrders({ search: '', premiseid: '', pagesize: '10', page: '1' })
     this.fetchAddresses()
   }
 }
