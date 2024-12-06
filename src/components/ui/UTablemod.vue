@@ -10,38 +10,17 @@
     <table class="table">
       <thead class="table__head">
         <tr>
-          <th>
+          <th v-for="column in columns" :key="column.keyName">
             <span class="table__head-item">
-              Number
+              {{ column.columnName }}
               <span
+                v-if="column.isSortable"
                 class="table__sortbtn"
-                :class="{ 'table__sortbtn--active': sortableColumnName === 'number' }"
-                @click="sortTable('number')"
+                :class="{ 'table__sortbtn--active': sortableColumnName === column.keyName }"
+                @click="sortTable(column.keyName)"
                 ><IconArrow
               /></span>
             </span>
-          </th>
-          <th>
-            <span class="table__head-item"
-              >Created At<span
-                class="table__sortbtn"
-                :class="{ 'table__sortbtn--active': sortableColumnName === 'created_at' }"
-                @click="sortTable('created_at')"
-                ><IconArrow /></span
-            ></span>
-          </th>
-          <th><span class="table__head-item">Address</span></th>
-          <th><span class="table__head-item">Last Name</span></th>
-          <th><span class="table__head-item">Description</span></th>
-          <th><span class="table__head-item">Due Date</span></th>
-          <th>
-            <span class="table__head-item"
-              >Status Name<span
-                class="table__sortbtn"
-                :class="{ 'table__sortbtn--active': sortableColumnName === 'statusname' }"
-                @click="sortTable('statusname')"
-                ><IconArrow /></span
-            ></span>
           </th>
         </tr>
       </thead>
@@ -77,7 +56,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('dataStore', ['searchQuery', 'addressFilter']),
+    ...mapState('dataStore', ['searchQuery', 'addressFilter', 'columns']),
     ...mapGetters('dataStore', ['uniqueAddresses']),
     ...mapGetters('paginationStore', ['paginatedData'])
   },
@@ -107,7 +86,7 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .table
   width: 100%
   border-collapse: collapse

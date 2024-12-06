@@ -1,17 +1,15 @@
 import axios from 'axios'
-// import store from '../store'
+import store from '@/store'
 
-const TOKEN_FROM_STORAGE = ''
-// store.getters['authStore/getToken']
-
-// console.log(TOKEN_FROM_STORAGE)
 const apiClient = axios.create({
   baseURL: 'https://dev.moydomonline.ru/api/',
   headers: {
     'Content-Type': 'application/json'
   }
 })
-export const getAppeals = async (search = '53', premise_id = '', page_size = 50, page = 1) => {
+export const getAppeals = async (search = '', premise_id = '', page_size = 50, page = 1) => {
+  const TOKEN_FROM_STORAGE = sessionStorage.getItem('mdo_key')
+  console.log(TOKEN_FROM_STORAGE)
   try {
     const response = await apiClient.get(`appeals/v1.0/appeals/`, {
       params: { search: search, premise_id: premise_id, page_size: page_size, page: page },
@@ -25,6 +23,7 @@ export const getAppeals = async (search = '53', premise_id = '', page_size = 50,
 }
 
 export const getAddresses = async () => {
+  const TOKEN_FROM_STORAGE = sessionStorage.getItem('mdo_key')
   try {
     const response = await apiClient.get('geo/v2.0/user-premises/', {
       headers: {
@@ -40,7 +39,7 @@ export const getAddresses = async () => {
 
 export const postLogin = async (username, password) => {
   try {
-    const response = await axios.post('auth/login/', {
+    const response = await apiClient.post('auth/login/', {
       username: username,
       password: password
     })

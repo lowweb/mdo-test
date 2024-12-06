@@ -4,11 +4,26 @@ import { getAppeals } from '../services/api'
 export const ordersStore = {
   namespaced: true,
   state: () => ({
-    orders: []
+    data: [],
+    orders: [],
+    searchQuery: '',
+    addressFilter: '',
+    sortKey: '',
+    sortOrder: 1,
+    columns: [
+      { keyName: 'number', columnName: '№', isSortable: true },
+      { keyName: 'columnname', columnName: 'Создана', isSortable: true },
+      { keyName: 'address', columnName: 'Адрес', isSortable: false },
+      { keyName: 'lastname', columnName: 'Заявитель', isSortable: false },
+      { keyName: 'description', columnName: 'Описание', isSortable: true },
+      { keyName: 'dueDate', columnName: 'Срок', isSortable: true },
+      { keyName: 'statusname', columnName: 'Статус', isSortable: true }
+    ]
   }),
   mutations: {
     setOrders(state, data) {
-      state.orders = data
+      state.orders = data.results
+      state.data = data
     },
     setSearchQuery(state, query) {
       state.searchQuery = query
@@ -28,6 +43,12 @@ export const ordersStore = {
       try {
         const data = await getAppeals()
         commit('setOrders', data)
+        commit('paginationStore/setCurrentPage', data.page, { root: true })
+        commit('paginationStore/setRowsPerPage', data.page_size, { root: true })
+        commit('paginationStore/setCountRecords', data.count, { root: true })
+        commit('paginationStore/setNextPage', data.page_next, { root: true })
+        commit('paginationStore/setPrevPage', data.page_previous, { root: true })
+        commit('paginationStore/setPagesCount', data.pages, { root: true })
       } catch (error) {
         console.error('Error fetching items:', error)
       }

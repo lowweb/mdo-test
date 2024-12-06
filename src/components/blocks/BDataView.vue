@@ -5,7 +5,7 @@
       <BDataFilters class="dataview__filter" />
     </div>
     <div class="dataview__table">
-      <UTable ref="uTable" :rows-per-page="rowsPerPage" :currentPage="currentPage" />
+      <UTable />
       <UPagination
         :total-items="totalItems"
         :rows-per-page="rowsPerPage"
@@ -21,7 +21,7 @@ import UButton from '../ui/UButton.vue'
 import UCustomSelect from '../ui/UCustomSelect.vue'
 import IconSearch from '../icons/IconSearch.vue'
 import UIconButton from '../ui/UIconButton.vue'
-import UTable from '../ui/UTablemod.vue'
+import UTable from '../ui/UTable.vue'
 import UPagination from '../ui/UPagination.vue'
 import BDataFilters from './BDataFilters.vue'
 import { mapState, mapMutations, mapGetters } from 'vuex'
@@ -41,15 +41,15 @@ export default {
   },
 
   methods: {
-    handlePageChange(page) {
-      this.currentPage = page
-      this.$refs.uTable.updatePage(page)
-    },
-    handleRowsPerPageChange(rows) {
-      this.rowsPerPage = rows
-      this.currentPage = 1
-      this.$refs.uTable.updateRowsPerPage(rows)
-    }
+    // handlePageChange(page) {
+    //   this.currentPage = page
+    //   this.$refs.uTable.updatePage(page)
+    // },
+    // handleRowsPerPageChange(rows) {
+    //   this.rowsPerPage = rows
+    //   this.currentPage = 1
+    //   this.$refs.uTable.updateRowsPerPage(rows)
+    // }
   }
 }
 </script>

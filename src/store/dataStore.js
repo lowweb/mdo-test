@@ -56,7 +56,16 @@ export const dataStore = {
     searchQuery: '',
     addressFilter: '',
     sortKey: '',
-    sortOrder: 1
+    sortOrder: 1,
+    columns: [
+      { keyName: 'number', columnName: '№', isSortable: true },
+      { keyName: 'created_at', columnName: 'Создана', isSortable: true },
+      { keyName: 'address', columnName: 'Адрес', isSortable: false },
+      { keyName: 'lastName', columnName: 'Заявитель', isSortable: false },
+      { keyName: 'description', columnName: 'Описание', isSortable: false },
+      { keyName: 'dueDate', columnName: 'Срок', isSortable: false },
+      { keyName: 'statusName', columnName: 'Статус', isSortable: true }
+    ]
   }),
   mutations: {
     setSearchQuery(state, query) {

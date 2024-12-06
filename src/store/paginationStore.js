@@ -3,8 +3,12 @@ import store from '../store'
 export const paginationStore = {
   namespaced: true,
   state: () => ({
-    currentPage: 1,
-    rowsPerPage: 3
+    currentPage: null,
+    rowsPerPage: null,
+    countRecords: null,
+    nextPage: null,
+    prevPage: null,
+    pagesCount: null
   }),
   mutations: {
     setCurrentPage(state, page) {
@@ -12,18 +16,30 @@ export const paginationStore = {
     },
     setRowsPerPage(state, rows) {
       state.rowsPerPage = rows
+    },
+    setCountRecords(state, count) {
+      state.countRecords = count
+    },
+    setNextPage(state, next) {
+      state.nextPage = next
+    },
+    setPrevPage(state, prev) {
+      state.prevPage = prev
+    },
+    setPagesCount(state, pages) {
+      state.pagesCount = pages
     }
   },
   getters: {
     paginatedData(state, getters) {
       const start = (state.currentPage - 1) * state.rowsPerPage
       const end = start + state.rowsPerPage
-      return store.getters['dataStore/filteredData'].slice(start, end)
-      // return getters.filteredData.slice(start, end)
+      // return store.getters['dataStore/filteredData'].slice(start, end)
+      return store.getters['ordersStore/filteredData'].slice(start, end)
     },
     totalItems(state, getters) {
-      // return getters.filteredData.length
-      return store.getters['dataStore/filteredData'].length
+      // return store.getters['dataStore/filteredData'].length
+      return store.getters['ordersStore/filteredData'].length
     }
   }
 }

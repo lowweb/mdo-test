@@ -1,4 +1,5 @@
 import { getAddresses } from '../services/api'
+
 export const addressesStore = {
   namespaced: true,
   state: () => ({

@@ -18,9 +18,7 @@ export default {
   data() {
     return { searchQuery: '' }
   },
-  // computed: {
-  //   ...mapGetters('ordersStore', ['paginatedItems'])
-  // },
+
   methods: {
     ...mapActions('ordersStore', ['fetchOrders']),
     ...mapActions('addressesStore', ['fetchAddresses'])

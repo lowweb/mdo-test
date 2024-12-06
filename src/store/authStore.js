@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { postLogin } from '../services/api'
 
 export const authStore = {
   namespaced: true,
@@ -14,11 +15,7 @@ export const authStore = {
   actions: {
     async login({ commit }, userData) {
       try {
-        const response = await axios.post('https://dev.moydomonline.ru/api/auth/login/', {
-          username: userData.username,
-          password: userData.password
-        })
-        const token = response.data.key
+        const token = await postLogin(userData.username, userData.password)
         commit('SET_AUTH_TOKEN', token)
         return token
       } catch (error) {

@@ -15,7 +15,7 @@ import { mapState, mapMutations, mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      options: [2, 3, 4, 5]
+      options: [10, 50, 100, 200]
     }
   },
   computed: {
