@@ -5,7 +5,8 @@
       <BDataFilters class="dataview__filter" />
     </div>
     <UTable class="dataview__table" />
-    <UPagination class="dataview__pagination" />
+    <!-- <UPagination class="dataview__pagination" :page-range="1" /> -->
+    <UPagination class="dataview__pagination" :totalItems="10000" :itemsPerPage="10" />
   </section>
 </template>
 
@@ -58,6 +59,7 @@ export default {
     &__header
         display: flex
         flex-direction: column
+        margin-bottom: 32px
 
     &__newbutton
         align-self: flex-end

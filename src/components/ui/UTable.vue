@@ -20,7 +20,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-if="totalItems === 0">
+      <tr v-if="countRecords === 0">
         <td>Нет данных</td>
       </tr>
       <tr class="table__row" v-for="item in paginatedData" :key="item.number">
@@ -66,7 +66,8 @@ export default {
   },
   computed: {
     ...mapState('ordersStore', ['searchQuery', 'addressFilter', 'columns', 'sortKey', 'sortOrder']),
-    ...mapGetters('paginationStore', ['paginatedData', 'totalItems'])
+    ...mapState('paginationStore', ['countRecords']),
+    ...mapGetters('paginationStore', ['paginatedData'])
   },
   methods: {
     ...mapMutations('ordersStore', [

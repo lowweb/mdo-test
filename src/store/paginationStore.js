@@ -36,10 +36,10 @@ export const paginationStore = {
       const end = start + state.rowsPerPage
       // return store.getters['dataStore/filteredData'].slice(start, end)
       return store.getters['ordersStore/filteredData'].slice(start, end)
-    },
-    totalItems(state, getters) {
-      // return store.getters['dataStore/filteredData'].length
-      return store.getters['ordersStore/filteredData'].length
     }
+    // totalItems(state, getters) {
+    //   // return store.getters['dataStore/filteredData'].length
+    //   return store.getters['ordersStore/filteredData'].length
+    // }
   }
 }
