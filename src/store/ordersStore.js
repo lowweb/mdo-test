@@ -32,15 +32,12 @@ export const ordersStore = {
           rootState.paginationStore.currentPage
         )
         commit('setOrders', data)
-        commit('paginationStore/setCurrentPage', data.page, { root: true })
-        commit('paginationStore/setRowsPerPage', data.page_size, { root: true })
         commit('paginationStore/setCountRecords', data.count, { root: true })
-        commit('paginationStore/setNextPage', data.page_next, { root: true })
-        commit('paginationStore/setPrevPage', data.page_previous, { root: true })
         commit('paginationStore/setPagesCount', data.pages, { root: true })
         commit('stateStore/setLoading', false, { root: true })
       } catch (error) {
-        console.error('Error fetching items:', error)
+        commit('stateStore/setLoading', false, { root: true })
+        throw error
       }
     }
   },

@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex'
+import { mapState, mapMutations, mapActions, mapGetters } from 'vuex'
 import USelect from './USelect.vue'
 import UIconButton from './UIconButton.vue'
 import IconToEnd from '../icons/IconToEnd.vue'
@@ -66,25 +66,21 @@ export default {
     }
   },
   computed: {
-    ...mapState('paginationStore', [
-      'currentPage',
-      'rowsPerPage',
-      'countRecords',
-      'nextPage',
-      'prevPage',
-      'pagesCount'
-    ]),
+    ...mapGetters('paginationStore', ['getCurrentPage', 'getRowsPerPage']),
+    ...mapState('paginationStore', ['countRecords', 'pagesCount']),
+
     currentPage: {
       get() {
-        return this.$store.state.paginationStore.currentPage
+        return this.getCurrentPage
       },
       set(value) {
         this.setCurrentPage(value)
       }
     },
+
     rowsPerPage: {
       get() {
-        return this.$store.state.paginationStore.rowsPerPage
+        return this.getRowsPerPage
       },
       set(value) {
         this.setRowsPerPage(value)

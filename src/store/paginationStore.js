@@ -3,11 +3,9 @@ import store from '../store'
 export const paginationStore = {
   namespaced: true,
   state: () => ({
-    currentPage: null,
-    rowsPerPage: null,
+    currentPage: 1,
+    rowsPerPage: 10,
     countRecords: null,
-    nextPage: null,
-    prevPage: null,
     pagesCount: null
   }),
   mutations: {
@@ -20,12 +18,6 @@ export const paginationStore = {
     setCountRecords(state, count) {
       state.countRecords = count
     },
-    setNextPage(state, next) {
-      state.nextPage = next
-    },
-    setPrevPage(state, prev) {
-      state.prevPage = prev
-    },
     setPagesCount(state, pages) {
       state.pagesCount = pages
     }
@@ -33,6 +25,12 @@ export const paginationStore = {
   getters: {
     paginatedData(state, getters) {
       return store.getters['ordersStore/filteredData']
+    },
+    getCurrentPage(state) {
+      return state.currentPage
+    },
+    getRowsPerPage(state) {
+      return state.rowsPerPage
     }
   }
 }

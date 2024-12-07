@@ -47,11 +47,19 @@ export default {
     ...mapMutations('addressesStore', ['setActiveAddressId']),
     ...mapMutations('paginationStore', ['setCurrentPage']),
     ...mapActions('ordersStore', ['fetchOrders']),
+    ...mapMutations('tooltipStore', ['showTooltip']),
 
-    searchAddress() {
+    async searchAddress() {
       this.setActiveAddressId(this.premiseId)
       this.setCurrentPage(1)
-      this.fetchOrders()
+      try {
+        await this.fetchOrders()
+      } catch (error) {
+        if (error.response) {
+          this.premiseId = null
+          this.showTooltip({ text: error.response.data.error.detail, isSuccess: false })
+        }
+      }
     },
     makeSearch() {
       this.setCurrentPage(1)
