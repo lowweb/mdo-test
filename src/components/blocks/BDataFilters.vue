@@ -57,13 +57,21 @@ export default {
       } catch (error) {
         if (error.response) {
           this.premiseId = null
+          this.setActiveAddressId(null)
           this.showTooltip({ text: error.response.data.error.detail, isSuccess: false })
         }
       }
     },
-    makeSearch() {
+    async makeSearch() {
       this.setCurrentPage(1)
-      this.fetchOrders()
+      try {
+        await this.fetchOrders()
+      } catch (error) {
+        if (error.response) {
+          this.setSearchQuery('')
+          this.showTooltip({ text: error.response.data.error.detail, isSuccess: false })
+        }
+      }
     }
   },
   created() {

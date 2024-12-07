@@ -138,17 +138,29 @@ export default {
     ...mapMutations('paginationStore', ['setCurrentPage', 'setRowsPerPage']),
     ...mapActions('ordersStore', ['fetchOrders']),
 
-    updateRowsPerPage() {
+    async updateRowsPerPage() {
       this.setCurrentPage(1)
       this.setRowsPerPage(this.rowsPerPage)
-      this.fetchOrders()
+      try {
+        await this.fetchOrders()
+      } catch (error) {
+        if (error.response) {
+          this.showTooltip({ text: error.response.data.error.detail, isSuccess: false })
+        }
+      }
     },
-    goToPage(page) {
+    async goToPage(page) {
       if (page >= 1 && page <= this.pagesCount) {
         this.currentPage = page
         this.setCurrentPage(page)
         this.setRowsPerPage(this.rowsPerPage)
-        this.fetchOrders()
+        try {
+          await this.fetchOrders()
+        } catch (error) {
+          if (error.response) {
+            this.showTooltip({ text: error.response.data.error.detail, isSuccess: false })
+          }
+        }
       }
     },
     goToFirstPage() {
