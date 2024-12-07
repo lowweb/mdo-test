@@ -66,33 +66,22 @@ export default {
     }
   },
   computed: {
-    ...mapState('ordersStore', ['searchQuery', 'addressFilter', 'sortKey', 'sortOrder']),
+    ...mapState('ordersStore', ['sortKey', 'sortOrder']),
     ...mapState('paginationStore', ['countRecords']),
     ...mapGetters('paginationStore', ['paginatedData']),
     ...mapGetters('stateStore', ['getLoading']),
     ...mapGetters('stateStore', ['getTableColumns'])
   },
   methods: {
-    ...mapMutations('ordersStore', [
-      'setSearchQuery',
-      'setAddressFilter',
-      'setSortKey',
-      'setSortOrder'
-    ]),
-    updateSearch(event) {
-      this.setSearchQuery(event.target.value)
-    },
-    updateAddressFilter(event) {
-      this.setAddressFilter(event.target.value)
-    },
+    ...mapMutations('ordersStore', ['setSortKey', 'setSortOrder']),
+
     sortTable(key) {
       this.sortableColumnName = key
 
       if (this.sortKey === key) {
+        console.log('sort')
         this.setSortOrder(this.sortOrder * -1)
-        console.log('1')
       } else {
-        console.log('2')
         this.setSortKey(key)
         this.setSortOrder(1)
       }

@@ -5,12 +5,12 @@ export const stateStore = {
     loading: false,
     tableColumns: [
       { keyName: 'number', columnName: '№', isSortable: true },
-      { keyName: 'columnname', columnName: 'Создана', isSortable: true },
+      { keyName: 'created_at', columnName: 'Создана', isSortable: true },
       { keyName: 'address', columnName: 'Адрес', isSortable: false },
       { keyName: 'lastname', columnName: 'Заявитель', isSortable: false },
       { keyName: 'description', columnName: 'Описание', isSortable: true },
-      { keyName: 'dueDate', columnName: 'Срок', isSortable: true },
-      { keyName: 'statusname', columnName: 'Статус', isSortable: true }
+      { keyName: 'due_date', columnName: 'Срок', isSortable: true },
+      { keyName: 'status.name', columnName: 'Статус', isSortable: true }
     ]
   }),
   getters: {
