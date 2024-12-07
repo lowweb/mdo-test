@@ -1,6 +1,6 @@
 <template>
   <div>
-    <UInput placeholder="Поиск (№ заявки, название)" v-model="searchQuery" @change="makeSearch">
+    <UInput placeholder="Поиск (№ заявки, название)" v-model="searchQuery" @input="debouncedInput">
       <template #inputRightIcon>
         <UIconButton class="dataview__inputbtn">
           <IconSearch />
@@ -17,6 +17,7 @@ import UInput from '../ui/UInput.vue'
 import USelect from '../ui/USelect.vue'
 import UIconButton from '../ui/UIconButton.vue'
 import IconSearch from '../icons/IconSearch.vue'
+import { debounce } from '../../utils/debounce'
 export default {
   components: {
     UInput,
@@ -56,6 +57,9 @@ export default {
       this.setCurrentPage(1)
       this.fetchOrders()
     }
+  },
+  created() {
+    this.debouncedInput = debounce(this.makeSearch, 700)
   }
 }
 </script>

@@ -3,7 +3,7 @@
     <span class="table__spinner" v-if="getLoading"><IconSpinner /></span>
     <thead class="table__head">
       <tr>
-        <th v-for="column in columns" :key="column.keyName">
+        <th v-for="column in getTableColumns" :key="column.keyName">
           <span class="table__head-item">
             {{ column.columnName }}
             <span
@@ -66,10 +66,11 @@ export default {
     }
   },
   computed: {
-    ...mapState('ordersStore', ['searchQuery', 'addressFilter', 'columns', 'sortKey', 'sortOrder']),
+    ...mapState('ordersStore', ['searchQuery', 'addressFilter', 'sortKey', 'sortOrder']),
     ...mapState('paginationStore', ['countRecords']),
     ...mapGetters('paginationStore', ['paginatedData']),
-    ...mapGetters('stateStore', ['getLoading'])
+    ...mapGetters('stateStore', ['getLoading']),
+    ...mapGetters('stateStore', ['getTableColumns'])
   },
   methods: {
     ...mapMutations('ordersStore', [

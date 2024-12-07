@@ -9,16 +9,7 @@ export const ordersStore = {
     searchQuery: '',
     addressFilter: '',
     sortKey: '',
-    sortOrder: 1,
-    columns: [
-      { keyName: 'number', columnName: '№', isSortable: true },
-      { keyName: 'columnname', columnName: 'Создана', isSortable: true },
-      { keyName: 'address', columnName: 'Адрес', isSortable: false },
-      { keyName: 'lastname', columnName: 'Заявитель', isSortable: false },
-      { keyName: 'description', columnName: 'Описание', isSortable: true },
-      { keyName: 'dueDate', columnName: 'Срок', isSortable: true },
-      { keyName: 'statusname', columnName: 'Статус', isSortable: true }
-    ]
+    sortOrder: 1
   }),
   mutations: {
     setOrders(state, data) {
