@@ -3,11 +3,15 @@ import { getAddresses } from '../services/api'
 export const addressesStore = {
   namespaced: true,
   state: () => ({
-    addresses: []
+    addresses: [],
+    activeAddressId: null
   }),
   mutations: {
     setAddresses(state, data) {
       state.addresses = data
+    },
+    setActiveAddressId(state, id) {
+      state.activeAddressId = id
     }
   },
   actions: {
@@ -25,7 +29,7 @@ export const addressesStore = {
       const addresses = state.addresses.map((item) => {
         return { value: item.customer_premise_id, name: item.address }
       })
-      console.log
+      addresses.unshift({ value: '', name: 'Все адреса' })
       return [...addresses]
     }
   }

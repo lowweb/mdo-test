@@ -8,6 +8,7 @@
         :disabled="disabled"
         :value="modelValue"
         class="input__field"
+        @input="updateValue"
       />
       <span class="input__righticon"><slot name="inputRightIcon"></slot></span>
     </div>
@@ -16,7 +17,6 @@
 
 <script>
 export default {
-  emits: ['update:modelValue'],
   props: {
     modelValue: String,
     disabled: {
@@ -33,6 +33,11 @@ export default {
       type: String,
       required: false,
       default: 'text'
+    }
+  },
+  methods: {
+    updateValue(event) {
+      this.$emit('update:modelValue', event.target.value)
     }
   }
 }

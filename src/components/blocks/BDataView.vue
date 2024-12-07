@@ -5,8 +5,7 @@
       <BDataFilters class="dataview__filter" />
     </div>
     <UTable class="dataview__table" />
-    <!-- <UPagination class="dataview__pagination" :page-range="1" /> -->
-    <UPagination class="dataview__pagination" :totalItems="10000" :itemsPerPage="10" />
+    <UPagination class="dataview__pagination" />
   </section>
 </template>
 
@@ -18,7 +17,6 @@ import UIconButton from '../ui/UIconButton.vue'
 import UTable from '../ui/UTable.vue'
 import UPagination from '../ui/UPagination.vue'
 import BDataFilters from './BDataFilters.vue'
-import { mapState, mapMutations, mapGetters } from 'vuex'
 export default {
   components: {
     UButton,
@@ -31,19 +29,7 @@ export default {
     BDataFilters
   },
   data() {
-    return { rowsPerPage: null, currentPage: null, totalItems: null }
-  },
-
-  methods: {
-    // handlePageChange(page) {
-    //   this.currentPage = page
-    //   this.$refs.uTable.updatePage(page)
-    // },
-    // handleRowsPerPageChange(rows) {
-    //   this.rowsPerPage = rows
-    //   this.currentPage = 1
-    //   this.$refs.uTable.updateRowsPerPage(rows)
-    // }
+    return {}
   }
 }
 </script>

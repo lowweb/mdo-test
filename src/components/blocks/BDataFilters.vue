@@ -1,41 +1,60 @@
 <template>
   <div>
-    <UInput placeholder="Поиск (№ заявки, название)" @input="updateSearch" v-model="searchQuery">
+    <UInput placeholder="Поиск (№ заявки, название)" v-model="searchQuery" @change="makeSearch">
       <template #inputRightIcon>
-        <UIconButton @click="console.log('dnejbdjwe')" class="dataview__inputbtn">
+        <UIconButton class="dataview__inputbtn">
           <IconSearch />
         </UIconButton>
       </template>
     </UInput>
-    <USelect :options="getAddresses" />
+    <USelect :options="getAddresses" @change="searchAddress" v-model="premiseId" />
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import UInput from '../ui/UInput.vue'
 import USelect from '../ui/USelect.vue'
+import UIconButton from '../ui/UIconButton.vue'
+import IconSearch from '../icons/IconSearch.vue'
 export default {
   components: {
     UInput,
-    USelect
+    USelect,
+    UIconButton,
+    IconSearch
   },
   data() {
     return {
-      searchQuery: ''
+      premiseId: null
     }
   },
   computed: {
-    ...mapGetters('addressesStore', ['getAddresses'])
+    ...mapGetters('stateStore', ['getSearchQuery']),
+    ...mapGetters('addressesStore', ['getAddresses']),
+    searchQuery: {
+      get() {
+        return this.getSearchQuery
+      },
+      set(value) {
+        this.setSearchQuery(value)
+      }
+    }
   },
   methods: {
-    updateSearch() {
-      // try {
-      //   const data = await getAddresses()
-      //   commit('setAddresses', data.results)
-      // } catch (error) {
-      //   console.error('Error fetching items:', error)
-      // }
+    ...mapMutations('stateStore', ['setSearchQuery']),
+    ...mapMutations('addressesStore', ['setActiveAddressId']),
+    ...mapMutations('paginationStore', ['setCurrentPage']),
+    ...mapActions('ordersStore', ['fetchOrders']),
+
+    searchAddress() {
+      this.setActiveAddressId(this.premiseId)
+      this.setCurrentPage(1)
+      this.fetchOrders()
+    },
+    makeSearch() {
+      this.setCurrentPage(1)
+      this.fetchOrders()
     }
   }
 }

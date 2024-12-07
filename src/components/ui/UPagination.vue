@@ -7,7 +7,7 @@
       <USelect
         class="pagination__select select--slim"
         :options="options"
-        v-model="this.rowsPerPage"
+        v-model="rowsPerPage"
         @change="updateRowsPerPage"
       />
     </div>
@@ -143,13 +143,16 @@ export default {
     ...mapActions('ordersStore', ['fetchOrders']),
 
     updateRowsPerPage() {
-      this.setRowsPerPage(this.rowsPerPage)
       this.setCurrentPage(1)
+      this.setRowsPerPage(this.rowsPerPage)
+      this.fetchOrders()
     },
     goToPage(page) {
       if (page >= 1 && page <= this.pagesCount) {
         this.currentPage = page
-        this.fetchOrders({ search: '', premiseid: '', pagesize: this.rowsPerPage, page: page })
+        this.setCurrentPage(page)
+        this.setRowsPerPage(this.rowsPerPage)
+        this.fetchOrders()
       }
     },
     goToFirstPage() {

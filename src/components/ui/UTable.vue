@@ -1,5 +1,6 @@
 <template>
-  <table class="table">
+  <table class="table" :class="{ 'table--loading': getLoading }">
+    <span class="table__spinner" v-if="getLoading"><IconSpinner /></span>
     <thead class="table__head">
       <tr>
         <th v-for="column in columns" :key="column.keyName">
@@ -20,9 +21,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-if="countRecords === 0">
-        <td>Нет данных</td>
-      </tr>
+      <span v-if="countRecords === 0" class="table__row--empty"> Нет данных </span>
       <tr class="table__row" v-for="item in paginatedData" :key="item.number">
         <td>
           <UButton class="button--small">{{ item.number }}</UButton>
@@ -41,10 +40,12 @@
 import { mapState, mapMutations, mapGetters } from 'vuex'
 import UButton from '../ui/UButton.vue'
 import IconArrow from '../icons/IconArrow.vue'
+import IconSpinner from '../icons/IconSpinner.vue'
 export default {
   components: {
     UButton,
-    IconArrow
+    IconArrow,
+    IconSpinner
   },
   data() {
     return {
@@ -67,7 +68,8 @@ export default {
   computed: {
     ...mapState('ordersStore', ['searchQuery', 'addressFilter', 'columns', 'sortKey', 'sortOrder']),
     ...mapState('paginationStore', ['countRecords']),
-    ...mapGetters('paginationStore', ['paginatedData'])
+    ...mapGetters('paginationStore', ['paginatedData']),
+    ...mapGetters('stateStore', ['getLoading'])
   },
   methods: {
     ...mapMutations('ordersStore', [
@@ -113,6 +115,27 @@ export default {
   color: $color-black
   table-layout: fixed
   border-collapse: collapse
+  position: relative
+
+  &__spinner
+    position: absolute
+    width: 100px
+    height: 100px
+    z-index: 100
+    left: 50%
+    transform: translate(-50%,-50%)
+
+  &--loading
+    &::before
+      content: ''
+      display: block
+      position: absolute
+      width: 100%
+      height: 100%
+      background-color: #ffffff
+      top: 0
+      z-index: 99
+      opacity: .8
 
   & th:nth-child(1)
     width: 10%
@@ -147,6 +170,9 @@ export default {
 
   &__row
     box-shadow: inset 0 -1px 0 0 #dddfe0
+    &--empty
+      display: flex
+      width: max-content
     & td
       padding: 15px 4px
       white-space: nowrap

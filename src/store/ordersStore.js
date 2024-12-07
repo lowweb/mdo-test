@@ -39,13 +39,15 @@ export const ordersStore = {
     }
   },
   actions: {
-    async fetchOrders({ commit }, payload) {
+    async fetchOrders({ commit, rootState }) {
       try {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+        commit('stateStore/setLoading', true, { root: true })
         const data = await getAppeals(
-          payload.search,
-          payload.premiseid,
-          payload.pagesize,
-          payload.page
+          rootState.stateStore.searchQuery,
+          rootState.addressesStore.activeAddressId,
+          rootState.paginationStore.rowsPerPage,
+          rootState.paginationStore.currentPage
         )
         commit('setOrders', data)
         commit('paginationStore/setCurrentPage', data.page, { root: true })
@@ -54,6 +56,7 @@ export const ordersStore = {
         commit('paginationStore/setNextPage', data.page_next, { root: true })
         commit('paginationStore/setPrevPage', data.page_previous, { root: true })
         commit('paginationStore/setPagesCount', data.pages, { root: true })
+        commit('stateStore/setLoading', false, { root: true })
       } catch (error) {
         console.error('Error fetching items:', error)
       }
