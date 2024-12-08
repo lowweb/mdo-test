@@ -1,6 +1,7 @@
 <template>
   <table class="table" :class="{ 'table--loading': getLoading }">
-    <span class="table__spinner" v-if="getLoading"><IconSpinner /></span>
+    <USpinner />
+    <!-- <span class="table__spinner" v-if="getLoading"><IconSpinner /></span> -->
     <thead class="table__head">
       <tr>
         <th v-for="column in getTableColumns" :key="column.keyName">
@@ -39,15 +40,17 @@
   </table>
 </template>
 <script>
-import { mapState, mapMutations, mapGetters } from 'vuex'
+import { mapState, mapMutations, mapGetters, mapActions } from 'vuex'
 import UButton from '../ui/UButton.vue'
 import IconArrow from '../icons/IconArrow.vue'
-import IconSpinner from '../icons/IconSpinner.vue'
+import USpinner from '../ui/USpinner.vue'
+// import IconSpinner from '../icons/IconSpinner.vue'
 export default {
   components: {
     UButton,
     IconArrow,
-    IconSpinner
+    // IconSpinner,
+    USpinner
   },
   data() {
     return {
@@ -76,7 +79,7 @@ export default {
   },
   methods: {
     ...mapMutations('ordersStore', ['setSortKey', 'setSortOrder']),
-
+    ...mapActions('itemStore', ['fetchItem']),
     sortTable(key) {
       this.sortableColumnName = key
 
@@ -93,6 +96,7 @@ export default {
       return date.toLocaleString('ru', options)
     },
     openOrderInfo(id) {
+      this.fetchItem(id)
       this.$router.push(`/orderinfo/${id}`)
     }
   }
@@ -112,13 +116,13 @@ export default {
   border-collapse: collapse
   position: relative
 
-  &__spinner
-    position: absolute
-    width: 100px
-    height: 100px
-    z-index: 100
-    left: 50%
-    transform: translate(-50%,-50%)
+  // &__spinner
+  //   position: absolute
+  //   width: 100px
+  //   height: 100px
+  //   z-index: 100
+  //   left: 50%
+  //   transform: translate(-50%,-50%)
 
   &--loading
     &::before

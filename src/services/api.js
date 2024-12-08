@@ -21,6 +21,20 @@ export const getAppeals = async (search = '', premise_id = '', page_size = 10, p
   }
 }
 
+export const fetchItem = async (search = '') => {
+  const TOKEN_FROM_STORAGE = sessionStorage.getItem('mdo_key')
+  try {
+    const response = await apiClient.get(`appeals/v1.0/appeals/`, {
+      params: { search: search },
+      headers: { Authorization: `Token ${TOKEN_FROM_STORAGE}` }
+    })
+    return response.data
+  } catch (error) {
+    console.error('Error fetching appeals:', error)
+    throw error
+  }
+}
+
 export const getAddresses = async () => {
   const TOKEN_FROM_STORAGE = sessionStorage.getItem('mdo_key')
   try {

@@ -7,6 +7,9 @@
       <div class="popup__body">
         <slot name="body"></slot>
       </div>
+      <div class="popup__footer">
+        <slot name="footer"></slot>
+      </div>
     </div>
   </div>
 </template>
@@ -37,7 +40,6 @@
     line-height: 150%
     color: $color-black
     margin-bottom: 24px
-  &__body
     display: flex
-    gap: 32px
+    justify-content: space-between
 </style>

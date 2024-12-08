@@ -6,6 +6,7 @@ import { ordersStore } from './ordersStore'
 import { paginationStore } from './paginationStore'
 import { addressesStore } from './addressesStore'
 import { stateStore } from './stateStore'
+import { itemStore } from './itemStore'
 
 const store = createStore({
   modules: {
@@ -14,7 +15,8 @@ const store = createStore({
     ordersStore,
     paginationStore,
     addressesStore,
-    stateStore
+    stateStore,
+    itemStore
   }
 })
 
