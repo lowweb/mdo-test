@@ -13,7 +13,8 @@
   flex-direction: column
   height: 100%
   background-color: #EEEEEE
-  padding: 23.5px 15px 0 15px
+  padding: 23.5px 15px
+  min-height: 100vh
 
   &__title
     font-family: $font-family

@@ -1,10 +1,16 @@
 <template>
   <main class="page__main">
-    <router-view v-slot="{ Component }">
+    <!-- <router-view v-slot="{ Component }">
       <keep-alive max="5">
         <component :is="Component" />
       </keep-alive>
-    </router-view>
+    </router-view> -->
+    <KeepAlive max="5">
+      <router-view />
+    </KeepAlive>
+    <KeepAlive max="5">
+      <router-view name="popup" />
+    </KeepAlive>
     <UToolTip :isShow="this.getIsShown" @closeTooltip="this.hideTooltip()">
       <template #tooltipBody>{{ this.getTextTooltip }}</template>
     </UToolTip>
@@ -38,7 +44,7 @@ export default {
   font-weight: normal
 
 .page__body
-  height: 100vh
+  min-height: 100vh
   font-family: $font-family
   font-size: 14px
   position: relative

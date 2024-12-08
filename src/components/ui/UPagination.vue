@@ -6,7 +6,7 @@
       >
       <USelect
         class="pagination__select select--slim"
-        :options="options"
+        :options="getRowsPerPageOptions"
         v-model="rowsPerPage"
         @change="updateRowsPerPage"
       />
@@ -55,18 +55,18 @@ export default {
     IconToEnd,
     IconToStart
   },
-  data() {
-    return {
-      options: [
-        { value: 10, name: 10 },
-        { value: 50, name: 50 },
-        { value: 100, name: 100 },
-        { value: 200, name: 200 }
-      ]
-    }
-  },
+  // data() {
+  //   return {
+  //     options: [
+  //       { value: 10, name: 10 },
+  //       { value: 50, name: 50 },
+  //       { value: 100, name: 100 },
+  //       { value: 200, name: 200 }
+  //     ]
+  //   }
+  // },
   computed: {
-    ...mapGetters('paginationStore', ['getCurrentPage', 'getRowsPerPage']),
+    ...mapGetters('paginationStore', ['getCurrentPage', 'getRowsPerPage', 'getRowsPerPageOptions']),
     ...mapState('paginationStore', ['countRecords', 'pagesCount']),
 
     currentPage: {

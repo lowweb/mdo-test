@@ -6,7 +6,13 @@ export const paginationStore = {
     currentPage: 1,
     rowsPerPage: 10,
     countRecords: null,
-    pagesCount: null
+    pagesCount: null,
+    rowsPerPageOptions: [
+      { value: 10, name: 10 },
+      { value: 50, name: 50 },
+      { value: 100, name: 100 },
+      { value: 200, name: 200 }
+    ]
   }),
   mutations: {
     setCurrentPage(state, page) {
@@ -31,6 +37,9 @@ export const paginationStore = {
     },
     getRowsPerPage(state) {
       return state.rowsPerPage
+    },
+    getRowsPerPageOptions(state) {
+      return state.rowsPerPageOptions
     }
   }
 }

@@ -24,7 +24,9 @@
       <span v-if="countRecords === 0" class="table__row--empty"> Нет данных </span>
       <tr class="table__row" v-for="item in paginatedData" :key="item.number">
         <td>
-          <UButton class="button--small">{{ item.number }}</UButton>
+          <UButton class="button--small" @click="openOrderInfo(item.number)">{{
+            item.number
+          }}</UButton>
         </td>
         <td>{{ getDate(item.created_at, optionsDate) }}</td>
         <td>{{ item.premise?.address }}</td>
@@ -89,6 +91,9 @@ export default {
     getDate(str, options) {
       var date = new Date(str)
       return date.toLocaleString('ru', options)
+    },
+    openOrderInfo(id) {
+      this.$router.push(`/orderinfo/${id}`)
     }
   }
 }
