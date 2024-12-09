@@ -1,16 +1,15 @@
 <template>
   <main class="page__main">
-    <!-- <router-view v-slot="{ Component }">
+    <router-view v-slot="{ Component }">
       <keep-alive max="5">
         <component :is="Component" />
       </keep-alive>
-    </router-view> -->
-    <KeepAlive max="5">
-      <router-view />
-    </KeepAlive>
-    <KeepAlive max="5">
-      <router-view name="popup" />
-    </KeepAlive>
+    </router-view>
+    <router-view name="popup" v-slot="{ Component }">
+      <keep-alive max="5">
+        <component :is="Component" />
+      </keep-alive>
+    </router-view>
     <UToolTip :isShow="this.getIsShown" @closeTooltip="this.hideTooltip()">
       <template #tooltipBody>{{ this.getTextTooltip }}</template>
     </UToolTip>

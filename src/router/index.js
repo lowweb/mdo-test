@@ -13,7 +13,6 @@ const router = createRouter({
       path: '/',
       name: 'orders',
       components: { default: OrdersListView },
-      // component: () => import('../views/OrdersListView.vue'),
       meta: {
         requiresAuth: true,
         keepAlive: true
@@ -23,7 +22,6 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       components: { default: LoginView },
-      // component: () => import('../views/LoginView.vue'),
       meta: {
         guest: true
       }
@@ -35,7 +33,6 @@ const router = createRouter({
         requiresAuth: true,
         keepAlive: true
       },
-      // component: () => import('../views/OrderInfoView.vue'),
       components: { default: OrdersListView, popup: OrderInfoView }
     },
     {
@@ -46,7 +43,6 @@ const router = createRouter({
         keepAlive: true
       },
       components: { default: OrdersListView, popup: AddOrderView }
-      // component: () => import('../views/AddOrderView.vue')
     },
     {
       path: '/:pathMatch(.*)',
