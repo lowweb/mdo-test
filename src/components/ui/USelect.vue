@@ -6,6 +6,7 @@
       @input="$emit('update:modelValue', $event.target.value)"
       class="select__field"
       :options="options"
+      :placeholder="placeholder"
     >
       <option value="" disabled selected hidden>Выберите вариант</option>
       <option v-for="option in options" :key="option.value" :value="option.value">
@@ -23,6 +24,11 @@ export default {
     options: {
       type: Array,
       default: () => []
+    },
+    placeholder: {
+      type: String,
+      required: false,
+      default: ''
     }
   }
 }

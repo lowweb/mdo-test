@@ -1,10 +1,29 @@
-import axios from 'axios'
-import { fetchItem, updateAppeals } from '../services/api'
+import { fetchItem, updateAppeals, putAppeals } from '../services/api'
 
 export const itemStore = {
   namespaced: true,
   state: () => ({
-    item: []
+    item: {
+      number: null,
+      created_at: null,
+      premise: {
+        id: null
+      },
+      apartment: {
+        id: null
+      },
+      applicant: {
+        last_name: null,
+        first_name: null,
+        patronymic_name: null,
+        username: null
+      },
+      description: null,
+      due_date: null,
+      status: {
+        name: null
+      }
+    }
   }),
   getters: {
     getItem(state) {
@@ -32,18 +51,22 @@ export const itemStore = {
   actions: {
     async fetchItem({ commit }, itemId) {
       try {
-        // commit('stateStore/setLoading', true, { root: true })
         const data = await fetchItem(itemId)
         commit('setItem', data)
-        // commit('stateStore/setLoading', false, { root: true })
       } catch (error) {
-        // commit('stateStore/setLoading', false, { root: true })
         throw error
       }
     },
     async updateAppeal({ state }) {
       try {
         const data = await updateAppeals(state.item.number, state.item)
+      } catch (error) {
+        throw error
+      }
+    },
+    async putAppeal({ state }) {
+      try {
+        const data = await putAppeals(state.item)
       } catch (error) {
         throw error
       }

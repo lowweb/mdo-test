@@ -1,7 +1,7 @@
 <template>
   <section class="dataview">
     <div class="dataview__header">
-      <UButton class="button--medium dataview__newbutton">СОЗДАТЬ</UButton>
+      <UButton class="button--medium dataview__newbutton" @click="newOrder">СОЗДАТЬ</UButton>
       <BDataFilters class="dataview__filter" />
     </div>
     <UTable class="dataview__table" />
@@ -11,7 +11,6 @@
 
 <script>
 import UButton from '../ui/UButton.vue'
-import UCustomSelect from '../ui/UCustomSelect.vue'
 import IconSearch from '../icons/IconSearch.vue'
 import UIconButton from '../ui/UIconButton.vue'
 import UTable from '../ui/UTable.vue'
@@ -20,13 +19,17 @@ import BDataFilters from './BDataFilters.vue'
 export default {
   components: {
     UButton,
-    UCustomSelect,
     IconSearch,
     UIconButton,
     UTable,
     UTable,
     UPagination,
     BDataFilters
+  },
+  methods: {
+    newOrder() {
+      this.$router.push(`/neworder`)
+    }
   },
   data() {
     return {}

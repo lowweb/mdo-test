@@ -15,7 +15,6 @@
   font-family: $font-family
   font-weight: 400
   font-size: 14px
-  // line-height: 20px
   line-height: 143%
   text-align: center
   color: $color-white

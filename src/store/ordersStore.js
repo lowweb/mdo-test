@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { getAppeals } from '../services/api'
 import { getNestedValue } from '@/utils/getNestedValue'
 

@@ -1,7 +1,6 @@
 <template>
   <table class="table" :class="{ 'table--loading': getLoading }">
     <USpinner />
-    <!-- <span class="table__spinner" v-if="getLoading"><IconSpinner /></span> -->
     <thead class="table__head">
       <tr>
         <th v-for="column in getTableColumns" :key="column.keyName">
@@ -44,12 +43,10 @@ import { mapState, mapMutations, mapGetters, mapActions } from 'vuex'
 import UButton from '../ui/UButton.vue'
 import IconArrow from '../icons/IconArrow.vue'
 import USpinner from '../ui/USpinner.vue'
-// import IconSpinner from '../icons/IconSpinner.vue'
 export default {
   components: {
     UButton,
     IconArrow,
-    // IconSpinner,
     USpinner
   },
   data() {
@@ -119,14 +116,6 @@ export default {
   table-layout: fixed
   border-collapse: collapse
   position: relative
-
-  // &__spinner
-  //   position: absolute
-  //   width: 100px
-  //   height: 100px
-  //   z-index: 100
-  //   left: 50%
-  //   transform: translate(-50%,-50%)
 
   &--loading
     &::before

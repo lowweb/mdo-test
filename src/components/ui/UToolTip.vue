@@ -54,6 +54,7 @@ export default {
   border-radius: 7px 4px 4px 7px
   border-left: solid 8px $color-green
   gap: 8px
+  z-index: 10
 
   &__title
     font-weight: bold

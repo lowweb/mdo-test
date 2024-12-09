@@ -39,8 +39,8 @@ const router = createRouter({
       components: { default: OrdersListView, popup: OrderInfoView }
     },
     {
-      path: '/addorder',
-      name: 'addorder',
+      path: '/neworder',
+      name: 'neworder',
       meta: {
         requiresAuth: true,
         keepAlive: true

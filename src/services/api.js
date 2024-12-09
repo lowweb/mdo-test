@@ -1,5 +1,4 @@
 import axios from 'axios'
-import store from '@/store'
 
 const apiClient = axios.create({
   baseURL: 'https://dev.moydomonline.ru/api/',
