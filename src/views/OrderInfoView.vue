@@ -148,17 +148,21 @@ export default {
     ...mapMutations('tooltipStore', ['showTooltip']),
     ...mapActions('itemStore', ['updateAppeal']),
     ...mapActions('addressesStore', ['fetchApartament']),
+    ...mapActions('ordersStore', ['fetchOrders']),
 
     async saveForm() {
       try {
         await this.updateAppeal()
+        await this.fetchOrders()
         this.closePopup()
         this.setItemNull()
+        this.$router.push(`/`)
       } catch (error) {
         if (error.response) {
+          this.showTooltip({ text: error.response.data.detail, isSuccess: false })
           this.setItemNull()
           this.closePopup()
-          this.showTooltip({ text: error.response.data.detail, isSuccess: false })
+          this.$router.push(`/`)
         }
       }
     },

@@ -144,19 +144,24 @@ export default {
     ...mapMutations('itemStore', ['setItemField', 'setItemNull']),
     ...mapMutations('tooltipStore', ['showTooltip']),
     ...mapActions('itemStore', ['putAppeal']),
+    ...mapActions('ordersStore', ['fetchOrders']),
     ...mapActions('addressesStore', ['fetchApartament']),
 
     async saveForm() {
       try {
         console.log('ffsdf')
         await this.putAppeal()
+        await this.fetchOrders()
+        this.fetchAddresses()
         this.closePopup()
         this.setItemNull()
+        this.$router.push(`/`)
       } catch (error) {
         if (error.response) {
+          this.showTooltip({ text: error.response.data.detail, isSuccess: false })
           this.setItemNull()
           this.closePopup()
-          this.showTooltip({ text: error.response.data.detail, isSuccess: false })
+          this.$router.push(`/`)
         }
       }
     },

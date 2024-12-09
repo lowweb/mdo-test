@@ -59,14 +59,14 @@ export const itemStore = {
     },
     async updateAppeal({ state }) {
       try {
-        const data = await updateAppeals(state.item.number, state.item)
+        await updateAppeals(state.item.number, state.item)
       } catch (error) {
         throw error
       }
     },
     async putAppeal({ state }) {
       try {
-        const data = await putAppeals(state.item)
+        await putAppeals(state.item)
       } catch (error) {
         throw error
       }
