@@ -97,7 +97,7 @@ export default {
     async openOrderInfo(id) {
       await this.fetchItem(id)
       const primiseId = await this.getItemField('premise.id')
-      await this.fetchApartament(primiseId)
+      this.fetchApartament(primiseId)
       this.$router.push(`/orderinfo/${id}`)
     }
   }
