@@ -1,26 +1,32 @@
 <template>
   <UPopup class="order-view">
     <template #caption
-      ><span>Заявка № {{ apartment_id }} (от {{}})</span><span>{{}}</span></template
+      ><span>Заявка № {{ number }} (от {{ created_at }})</span><span>{{ status }}</span></template
     >
     <template #body>
       <div class="order-view__row">
-        <USelect><template #selectLabel>Дом</template></USelect>
-        <USelect><template #selectLabel>Квартира</template></USelect>
-        <UInput type="date"><template #inputLabel>Срок</template></UInput>
+        <USelect v-model="premise_id" :options="getAddressesById" @change="selectPremise"
+          ><template #selectLabel>Дом</template></USelect
+        >
+        <USelect v-model="apartment_id" :options="getApartament"
+          ><template #selectLabel>Квартира</template></USelect
+        >
+        <UInput v-model="due_date" type="date"><template #inputLabel>Срок</template></UInput>
       </div>
       <div class="order-view__row">
         <UInput v-model="last_name"><template #inputLabel>Фамилия</template></UInput>
-        <UInput v-model="apartment_id"><template #inputLabel>Имя</template></UInput>
-        <UInput><template #inputLabel>Отчество</template></UInput>
-        <UInput><template #inputLabel>Телефон</template></UInput>
+        <UInput v-model="first_name"><template #inputLabel>Имя</template></UInput>
+        <UInput v-model="patronymic_name"><template #inputLabel>Отчество</template></UInput>
+        <UInput v-model="username"><template #inputLabel>Телефон</template></UInput>
       </div>
       <div class="order-view__row">
-        <UTextArea><template #textareaLabel>Описание заявки</template></UTextArea>
+        <UTextArea v-model="description"
+          ><template #textareaLabel>Описание заявки</template></UTextArea
+        >
       </div>
     </template>
     <template #footer>
-      <UButton>Сохранить</UButton>
+      <UButton @click="saveForm">Сохранить</UButton>
     </template>
   </UPopup>
 </template>
@@ -44,15 +50,21 @@ export default {
   },
   computed: {
     ...mapGetters('itemStore', ['getItemField']),
-    // createdAt() {
-    //   return formatDate(this.getItem.created_at, 'yymmdd')
-    // },
-    premise_id: {
+    ...mapGetters('addressesStore', ['getAddressesById', 'getApartament']),
+    number: {
       get() {
-        return this.getItemField('premise_id')
+        return this.getItemField('number')
       },
       set(value) {
-        this.setItemField({ field: 'premise_id', value })
+        this.setItemField({ field: 'number', value })
+      }
+    },
+    created_at: {
+      get() {
+        return formatDate(this.getItemField('created_at'), 'DDMMYY')
+      },
+      set(value) {
+        this.setItemField({ field: 'created_at', value })
       }
     },
     apartment_id: {
@@ -63,6 +75,14 @@ export default {
         this.setItemField({ field: 'apartment.id', value })
       }
     },
+    premise_id: {
+      get() {
+        return this.getItemField('premise.id')
+      },
+      set(value) {
+        this.setItemField({ field: 'premise.id', value })
+      }
+    },
     last_name: {
       get() {
         return this.getItemField('applicant.last_name')
@@ -70,13 +90,81 @@ export default {
       set(value) {
         this.setItemField({ field: 'applicant.last_name', value })
       }
+    },
+    first_name: {
+      get() {
+        return this.getItemField('applicant.first_name')
+      },
+      set(value) {
+        this.setItemField({ field: 'applicant.first_name', value })
+      }
+    },
+    patronymic_name: {
+      get() {
+        return this.getItemField('applicant.patronymic_name')
+      },
+      set(value) {
+        this.setItemField({ field: 'applicant.patronymic_name', value })
+      }
+    },
+    username: {
+      get() {
+        return this.getItemField('applicant.username')
+      },
+      set(value) {
+        this.setItemField({ field: 'applicant.username', value })
+      }
+    },
+    description: {
+      get() {
+        return this.getItemField('description')
+      },
+      set(value) {
+        this.setItemField({ field: 'description', value })
+      }
+    },
+    due_date: {
+      get() {
+        return formatDate(this.getItemField('due_date'), 'YYMMDD')
+      },
+      set(value) {
+        this.setItemField({ field: 'due_date', value })
+      }
+    },
+    status: {
+      get() {
+        return this.getItemField('status.name')
+      },
+      set(value) {
+        this.setItemField({ field: 'status.name', value })
+      }
     }
   },
   methods: {
     closePopup() {
       this.$router.push('/')
     },
-    ...mapMutations('itemStore', ['setItemField'])
+    ...mapMutations('itemStore', ['setItemField', 'setItemNull']),
+    ...mapMutations('tooltipStore', ['showTooltip']),
+    ...mapActions('itemStore', ['updateAppeal']),
+    ...mapActions('addressesStore', ['fetchApartament']),
+
+    async saveForm() {
+      try {
+        await this.updateAppeal()
+        this.closePopup()
+        this.setItemNull()
+      } catch (error) {
+        if (error.response) {
+          this.setItemNull()
+          this.closePopup()
+          this.showTooltip({ text: error.response.data.detail, isSuccess: false })
+        }
+      }
+    },
+    selectPremise() {
+      this.fetchApartament(this.premise_id)
+    }
   }
 }
 </script>

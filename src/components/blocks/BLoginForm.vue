@@ -30,7 +30,6 @@
 import { mapActions, mapMutations } from 'vuex'
 import UButton from '../ui/UButton.vue'
 import UFormInput from '../ui/UFormInput.vue'
-import UCommonInput from '../ui/inputs/UCommonInput.vue'
 import IconPhone from '../icons/IconPhone.vue'
 import IconLock from '../icons/IconLock.vue'
 import IconShowPass from '../icons/IconShowPass.vue'
@@ -43,7 +42,6 @@ export default {
   components: {
     UButton,
     UFormInput,
-    UCommonInput,
     IconPhone,
     IconLock,
     IconShowPass,

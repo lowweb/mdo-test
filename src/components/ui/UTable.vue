@@ -75,16 +75,17 @@ export default {
     ...mapState('paginationStore', ['countRecords']),
     ...mapGetters('paginationStore', ['paginatedData']),
     ...mapGetters('stateStore', ['getLoading']),
-    ...mapGetters('stateStore', ['getTableColumns'])
+    ...mapGetters('stateStore', ['getTableColumns']),
+    ...mapGetters('itemStore', ['getItemField'])
   },
   methods: {
     ...mapMutations('ordersStore', ['setSortKey', 'setSortOrder']),
     ...mapActions('itemStore', ['fetchItem']),
+    ...mapActions('addressesStore', ['fetchApartament']),
     sortTable(key) {
       this.sortableColumnName = key
 
       if (this.sortKey === key) {
-        console.log('sort')
         this.setSortOrder(this.sortOrder * -1)
       } else {
         this.setSortKey(key)
@@ -95,8 +96,11 @@ export default {
       var date = new Date(str)
       return date.toLocaleString('ru', options)
     },
-    openOrderInfo(id) {
-      this.fetchItem(id)
+
+    async openOrderInfo(id) {
+      await this.fetchItem(id)
+      const primiseId = await this.getItemField('premise.id')
+      await this.fetchApartament(primiseId)
       this.$router.push(`/orderinfo/${id}`)
     }
   }

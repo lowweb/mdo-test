@@ -78,4 +78,7 @@ export default {
     line-height: 143%
     color: $color-black
     border: none
+
+    &:focus
+      outline: none
 </style>

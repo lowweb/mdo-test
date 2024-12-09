@@ -21,6 +21,37 @@ export const getAppeals = async (search = '', premise_id = '', page_size = 10, p
   }
 }
 
+export const updateAppeals = async (itemNumber, data) => {
+  const TOKEN_FROM_STORAGE = sessionStorage.getItem('mdo_key')
+  try {
+    const response = await apiClient.patch(`appeals/v1.0/appeals/${itemNumber}/`, data, {
+      headers: {
+        Authorization: `Token ${TOKEN_FROM_STORAGE}`,
+        'Content-Type': 'application/json'
+      }
+    })
+    return response.data
+  } catch (error) {
+    console.error('Error fetching appeals:', error)
+    throw error
+  }
+}
+export const putAppeals = async (data) => {
+  const TOKEN_FROM_STORAGE = sessionStorage.getItem('mdo_key')
+  try {
+    const response = await apiClient.post(`appeals/v1.0/appeals/`, data, {
+      headers: {
+        Authorization: `Token ${TOKEN_FROM_STORAGE}`,
+        'Content-Type': 'application/json'
+      }
+    })
+    return response.data
+  } catch (error) {
+    console.error('Error fetching appeals:', error)
+    throw error
+  }
+}
+
 export const fetchItem = async (search = '') => {
   const TOKEN_FROM_STORAGE = sessionStorage.getItem('mdo_key')
   try {
@@ -39,6 +70,21 @@ export const getAddresses = async () => {
   const TOKEN_FROM_STORAGE = sessionStorage.getItem('mdo_key')
   try {
     const response = await apiClient.get('geo/v2.0/user-premises/', {
+      headers: {
+        Authorization: `Token ${TOKEN_FROM_STORAGE}`
+      }
+    })
+    return response.data
+  } catch (error) {
+    console.error('Error get address:', error)
+    throw error
+  }
+}
+
+export const getApartament = async (id) => {
+  const TOKEN_FROM_STORAGE = sessionStorage.getItem('mdo_key')
+  try {
+    const response = await apiClient.get(`geo/v1.0/apartments/?premise_id=${id}&search=`, {
       headers: {
         Authorization: `Token ${TOKEN_FROM_STORAGE}`
       }
